@@ -1,7 +1,10 @@
 ﻿using CityGasWebApi.Models;
+using Grpc.Net.Client;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using RJCGrpcService;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CityGasWebApi.Services
 {
@@ -23,6 +26,16 @@ namespace CityGasWebApi.Services
                 currentUser.CurrentAuthority = "guest";
                 return currentUser;
             }
+        }
+
+        public static async Task<string> RpcClient()
+        {
+            using var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            var client = new Greeter.GreeterClient(channel);
+            var response = await client.SayHelloAsync(new HelloRequest { Name = "测试Rpc" });
+            var response1 = await client.GetStationFieldDataAsync(new StationName { Name = "站点名称" });
+            var response2 = await client.WriteStationAsync(new ControlModel { Action = "指令",Target="目标" });
+            return "rpc应答数据\nSayHelloAsync：" + response.Message + "\nGetStationFieldDataAsync：" + response1.Data + "\nWriteStationAsync：" + response2.Result;
         }
     }
 }

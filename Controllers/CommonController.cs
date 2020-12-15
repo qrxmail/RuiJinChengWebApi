@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using CityGasWebApi.Models;
+using CityGasWebApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CityGasWebApi.Controllers
@@ -84,6 +85,17 @@ namespace CityGasWebApi.Controllers
                             Value = a.Key.CarNumber,
                         };
             return query.ToList();
+        }
+
+        /// <summary>
+        /// 获取当前登录用户
+        /// </summary>
+        /// <returns></returns>
+        [Route("rpcClientTest")]
+        [HttpGet]
+        public async System.Threading.Tasks.Task<ActionResult<string>> rpcClientTestAsync()
+        {
+            return await CommonService.RpcClient();
         }
 
     }
