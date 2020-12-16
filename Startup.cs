@@ -46,12 +46,19 @@ namespace RuiJinChengWebApi
 
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            #region ¿çÓò
+            //#region ¿çÓò
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy(AllowSpecificOrigin, builder => { builder.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader(); });
+            //});
+            //#endregion
             services.AddCors(options =>
             {
-                options.AddPolicy(AllowSpecificOrigin, builder => { builder.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader(); });
+                options.AddPolicy("cors", builder =>
+                {
+                    builder.SetIsOriginAllowed(origin => true).AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+                });
             });
-            #endregion
 
             // ÅäÖÃsession
             services.AddSession(options =>
