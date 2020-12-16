@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Http;
 using Quartz.Impl;
 using Quartz;
+using RuiJinChengWebApi.Hubs;
 
 namespace RuiJinChengWebApi
 {
@@ -66,6 +67,11 @@ namespace RuiJinChengWebApi
 
             // 注册ISchedulerFactory的实例
             services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
+
+            services.AddRazorPages();
+
+            // 注册SignalR
+            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app)
@@ -76,7 +82,12 @@ namespace RuiJinChengWebApi
             app.UseRouting();
             //CORS 中间件必须配置为在对 UseRouting 和 UseEndpoints的调用之间执行。 配置不正确将导致中间件停止正常运行。
             app.UseCors(AllowSpecificOrigin);
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints => 
+            { 
+                endpoints.MapControllers();
+                // SignalR 添加到 ASP.NET Core 依赖关系注入系统和中间件管道
+                endpoints.MapHub<ChatHub>("/chathub");
+            });
 
             app.UseDefaultFiles();
             app.UseStaticFiles();

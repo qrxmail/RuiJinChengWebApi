@@ -5,10 +5,14 @@ using RuiJinChengWebApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Quartz;
-using RuiJinChengWebApi.Services;
+using RuiJinChengWebApi.Hubs;
+using Microsoft.AspNetCore.SignalR;
+using System.Threading;
+using System;
 
 namespace RuiJinChengWebApi.Controllers
 {
+
     [Route("api/common")]
     [ApiController]
     public class CommonController : ControllerBase
@@ -16,14 +20,16 @@ namespace RuiJinChengWebApi.Controllers
         private readonly ILogger<CommonController> _logger;
         private readonly ISchedulerFactory _schedulerFactory;
         private IScheduler _scheduler;
+        private readonly IHubContext<ChatHub> _hub;
 
         private readonly RuiJinChengWebContext _context;
 
-        public CommonController(RuiJinChengWebContext context, ILogger<CommonController> logger, ISchedulerFactory schedulerFactory)
+        public CommonController(RuiJinChengWebContext context, ILogger<CommonController> logger, ISchedulerFactory schedulerFactory, IHubContext<ChatHub> hub)
         {
             _context = context;
             _logger = logger;
             _schedulerFactory = schedulerFactory;
+            _hub = hub;
         }
 
         // 获取站点数据（下拉选框数据：所属单位Branch、管理区District、站名Name）
@@ -124,6 +130,8 @@ namespace RuiJinChengWebApi.Controllers
             var trigger = TriggerBuilder.Create()
                             .WithSimpleSchedule(x => x.WithIntervalInSeconds(10).RepeatForever())//每10秒执行一次
                             .Build();
+            //实例化Jobs用到的对象（singalr）
+            Jobs._hub = _hub;
             //创建作业实例
             //Jobs即我们需要执行的作业
             var jobDetail = JobBuilder.Create<Jobs>()
@@ -131,9 +139,29 @@ namespace RuiJinChengWebApi.Controllers
                             .Build();
             //将触发器和作业任务绑定到调度器中
             await _scheduler.ScheduleJob(jobDetail, trigger);
-          
         }
 
+        /// <summary>
+        /// websocekt测试（利用死循环实现定时发送socket消息）
+        /// </summary>
+        /// <returns></returns>
+        [Route("webSocketTest")]
+        [HttpGet]
+        public async Task WebSocketTest()
+        {
+            while (true)
+            {
+                try
+                {
+                    Thread.Sleep(10000);
+                    await _hub.Clients.All.SendAsync("ReceiveMessage", "job", "test");
+                }
+                catch (Exception)
+                {
+                    break;
+                }
+            }
+        }
 
     }
 
