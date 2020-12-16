@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using CityGasWebApi.Models;
+using RuiJinChengWebApi.Models;
 using System;
 using System.Text.Encodings.Web;
 using System.Text.Json;
@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Http;
 using Quartz.Impl;
 using Quartz;
 
-namespace CityGasWebApi
+namespace RuiJinChengWebApi
 {
     public class Startup
     {

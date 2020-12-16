@@ -1,9 +1,9 @@
-﻿using CityGasWebApi.Models.BaseInfo;
-using CityGasWebApi.Models.Common;
-using CityGasWebApi.Models.Work;
+﻿using RuiJinChengWebApi.Models.BaseInfo;
+using RuiJinChengWebApi.Models.Common;
+using RuiJinChengWebApi.Models.Work;
 using Microsoft.EntityFrameworkCore;
 
-namespace CityGasWebApi.Models
+namespace RuiJinChengWebApi.Models
 {
     public class RuiJinChengWebContext : DbContext
     {

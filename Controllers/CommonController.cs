@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CityGasWebApi.Models;
-using CityGasWebApi.Services;
+using RuiJinChengWebApi.Models;
+using RuiJinChengWebApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Quartz;
 using RuiJinChengWebApi.Services;
 
-namespace CityGasWebApi.Controllers
+namespace RuiJinChengWebApi.Controllers
 {
     [Route("api/common")]
     [ApiController]

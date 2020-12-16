@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace CityGasWebApi.Models.Work
+namespace RuiJinChengWebApi.Models.Work
 {
     public class WorkTicket
     {

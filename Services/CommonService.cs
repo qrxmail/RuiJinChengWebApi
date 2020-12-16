@@ -1,4 +1,4 @@
-﻿using CityGasWebApi.Models;
+﻿using RuiJinChengWebApi.Models;
 using Grpc.Net.Client;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
@@ -6,7 +6,7 @@ using RJCGrpcService;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CityGasWebApi.Services
+namespace RuiJinChengWebApi.Services
 {
     public class CommonService
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace CityGasWebApi.Models.BaseInfo
+namespace RuiJinChengWebApi.Models.BaseInfo
 {
     public class OilStation
     {

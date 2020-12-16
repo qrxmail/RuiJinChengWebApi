@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CityGasWebApi.Models
+namespace RuiJinChengWebApi.Models
 {
     /// <summary>
     /// 前端列表数据的通用参数

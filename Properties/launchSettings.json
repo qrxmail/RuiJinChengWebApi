@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "http://localhost/CityGasWebApi",
+      "applicationUrl": "http://localhost/RuiJinChengWebApi",
       "sslPort": 0
     },
     "iisExpress": {
@@ -22,7 +22,7 @@
       },
       "nativeDebugging": true
     },
-    "CityGasWebApi": {
+    "RuiJinChengWebApi": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",

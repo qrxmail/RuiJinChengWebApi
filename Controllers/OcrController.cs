@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
-namespace CityGasWebApi.Controllers
+namespace RuiJinChengWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

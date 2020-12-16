@@ -2,14 +2,14 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using CityGasWebApi.Models;
+using RuiJinChengWebApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using CityGasWebApi.Services;
+using RuiJinChengWebApi.Services;
 
-namespace CityGasWebApi.Controllers
+namespace RuiJinChengWebApi.Controllers
 {
     [Route("api")]
     [ApiController]

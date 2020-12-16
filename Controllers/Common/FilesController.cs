@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using CityGasWebApi.Models;
-using CityGasWebApi.Models.Common;
-using CityGasWebApi.Services;
+using RuiJinChengWebApi.Models;
+using RuiJinChengWebApi.Models.Common;
+using RuiJinChengWebApi.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace CityGasWebApi.Controllers.BaseInfo
+namespace RuiJinChengWebApi.Controllers.BaseInfo
 {
     [Route("api/files")]
     [ApiController]

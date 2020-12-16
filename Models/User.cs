@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace CityGasWebApi.Models
+namespace RuiJinChengWebApi.Models
 {
     public class User
     {

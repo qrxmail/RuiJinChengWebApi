@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CityGasWebApi.Models;
-using CityGasWebApi.Models.BaseInfo;
-using CityGasWebApi.Services;
+using RuiJinChengWebApi.Models;
+using RuiJinChengWebApi.Models.BaseInfo;
+using RuiJinChengWebApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace CityGasWebApi.Controllers.BaseInfo
+namespace RuiJinChengWebApi.Controllers.BaseInfo
 {
     [Route("api/oilStation")]
     [ApiController]

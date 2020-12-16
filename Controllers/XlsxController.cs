@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 
-namespace CityGasWebApi.Controllers
+namespace RuiJinChengWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

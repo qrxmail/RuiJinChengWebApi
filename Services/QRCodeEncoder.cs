@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text;
 using System.Security.Cryptography;
-using CityGasWebApi.Models.Work;
+using RuiJinChengWebApi.Models.Work;
 
 
-namespace CityGasWebApi.Services
+namespace RuiJinChengWebApi.Services
 {
 	public class QRCodeEncoder
 	{

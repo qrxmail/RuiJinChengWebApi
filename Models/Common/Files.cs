@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace CityGasWebApi.Models.Common
+namespace RuiJinChengWebApi.Models.Common
 {
     public class Files
     {
