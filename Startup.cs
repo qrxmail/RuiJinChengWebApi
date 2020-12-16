@@ -11,6 +11,8 @@ using System.Text.Json.Serialization;
 using System.Text.Unicode;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Http;
+using Quartz.Impl;
+using Quartz;
 
 namespace CityGasWebApi
 {
@@ -59,8 +61,11 @@ namespace CityGasWebApi
             });
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddHttpContextAccessor();
-            //HttpContextAccessor 默认实现了它简化了访问HttpContext
+            // HttpContextAccessor 默认实现了它简化了访问HttpContext
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            // 注册ISchedulerFactory的实例
+            services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
         }
 
         public void Configure(IApplicationBuilder app)

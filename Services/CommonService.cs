@@ -35,7 +35,10 @@ namespace CityGasWebApi.Services
             var response = await client.SayHelloAsync(new HelloRequest { Name = "测试Rpc" });
             var response1 = await client.GetStationFieldDataAsync(new StationName { Name = "站点名称" });
             var response2 = await client.WriteStationAsync(new ControlModel { Action = "指令",Target="目标" });
-            return "rpc应答数据\nSayHelloAsync：" + response.Message + "\nGetStationFieldDataAsync：" + response1.Data + "\nWriteStationAsync：" + response2.Result;
+            return "rpc应答数据" +
+                "\nSayHelloAsync：" + response.Message + "" +
+                "\nGetStationFieldDataAsync：" + response1.Data + "" +
+                "\nWriteStationAsync：" + response2.Result;
         }
     }
 }
