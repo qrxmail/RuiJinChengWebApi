@@ -14,12 +14,14 @@ using Microsoft.AspNetCore.Http;
 using Quartz.Impl;
 using Quartz;
 using RuiJinChengWebApi.Hubs;
+using Microsoft.Extensions.FileProviders;
 
 namespace RuiJinChengWebApi
 {
     public class Startup
     {
-        private readonly string AllowSpecificOrigin = "AllowSpecificOrigin";
+        // 跨域策略名称：可以任意取
+        private readonly string OriginName = "cors";
 
         public Startup(IConfiguration configuration)
         {
@@ -46,18 +48,25 @@ namespace RuiJinChengWebApi
 
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            //#region 跨域
+            // 允许任意网址跨域
             //services.AddCors(options =>
             //{
-            //    options.AddPolicy(AllowSpecificOrigin, builder => { builder.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader(); });
+            //    options.AddPolicy(OriginName,
+            //        builder =>
+            //        {
+            //            builder.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader();
+            //        });
             //});
-            //#endregion
+
+            // 允许指定网址的跨域请求
             services.AddCors(options =>
             {
-                options.AddPolicy("cors", builder =>
-                {
-                    builder.SetIsOriginAllowed(origin => true).AllowAnyHeader().AllowAnyMethod().AllowCredentials();
-                });
+                options.AddPolicy(OriginName,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:8000",
+                                                          "http://localhost:8090");
+                                  });
             });
 
             // 配置session
@@ -87,8 +96,19 @@ namespace RuiJinChengWebApi
             app.UseSession();
 
             app.UseRouting();
-            //CORS 中间件必须配置为在对 UseRouting 和 UseEndpoints的调用之间执行。 配置不正确将导致中间件停止正常运行。
-            app.UseCors(AllowSpecificOrigin);
+
+            // 允许指定网址的跨域请求(signalr必须要指定)
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins("http://localhost:8000")
+                    .AllowAnyHeader()
+                    .WithMethods("GET", "POST")
+                    .AllowCredentials();
+            });
+
+            // CORS 中间件必须配置为在对 UseRouting 和 UseEndpoints的调用之间执行。 配置不正确将导致中间件停止正常运行。
+            app.UseCors(OriginName);
+
             app.UseEndpoints(endpoints => 
             { 
                 endpoints.MapControllers();
@@ -107,7 +127,7 @@ namespace RuiJinChengWebApi
             app.UseDefaultFiles(defaultFilesOptions);
 
             StaticFileOptions staticFileOptions = new StaticFileOptions();
-            staticFileOptions.FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(@"D:\webapi\NFCInspectServer\wwwroot");
+            staticFileOptions.FileProvider = new PhysicalFileProvider(@"D:\webapi\NFCInspectServer\wwwroot");
             app.UseStaticFiles(staticFileOptions);//开启静态文件
         }
 

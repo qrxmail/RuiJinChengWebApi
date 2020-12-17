@@ -19,7 +19,7 @@ namespace RuiJinChengWebApi.Services
             return Task.Run(() =>
             {
                 // 定时发送websocket消息
-                _hub.Clients.All.SendAsync("ReceiveMessage", "job", "test11111111");
+                _hub.Clients.All.SendAsync("ReceiveMessage", "job"+ DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), "test11111111");
 
                 // 写日志
                 using (StreamWriter sw = new StreamWriter(@"D:\message.log", true, Encoding.UTF8))
