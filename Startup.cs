@@ -15,6 +15,7 @@ using Quartz.Impl;
 using Quartz;
 using RuiJinChengWebApi.Hubs;
 using Microsoft.Extensions.FileProviders;
+using RuiJinChengWebApi.Services;
 
 namespace RuiJinChengWebApi
 {
@@ -29,7 +30,6 @@ namespace RuiJinChengWebApi
         }
 
         public IConfiguration Configuration { get; }
-
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -77,17 +77,19 @@ namespace RuiJinChengWebApi
                 options.Cookie.HttpOnly = true;//设置在浏览器不能通过js获得该cookie的值
             });
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddHttpContextAccessor();
             // HttpContextAccessor 默认实现了它简化了访问HttpContext
+            services.AddHttpContextAccessor();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-            // 注册ISchedulerFactory的实例
-            services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
-
+            // 支持使用cshtml页面
             services.AddRazorPages();
 
             // 注册SignalR
             services.AddSignalR();
+
+            // 注册ISchedulerFactory的实例
+            services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
+            JobSchedulerWork.Work();
         }
 
         public void Configure(IApplicationBuilder app)
