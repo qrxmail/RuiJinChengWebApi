@@ -1,0 +1,492 @@
+﻿<!DOCTYPE html>
+<html style="overflow-x:inherit;overflow-y:auto;">
+<head>
+    <meta charset="utf-8" />
+    <title>陕西城燃驾驶舱</title>
+    <script src="jquery.min.js"></script>
+    <script src="echarts.min.js"></script>
+    <script src="shanxi.js"></script>
+    <script src="jiangsu.js"></script>
+    <script src="index.js"></script>
+
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(1, 13, 34);
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+            transform: scale(1);
+            transform-origin: 0 0;
+            width: 1920px;
+            height: 1080px;
+            font-family: 'Microsoft YaHei';
+        }
+    </style>
+</head>
+
+<body id="body">
+
+    <!--背景-->
+    <div style="
+        background-image: url('img/bg1920.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 1920px;
+        height: 1080px;
+        position:absolute;
+        top:0px;
+        left:0px;
+        z-index: 1;
+    ">
+    </div>
+
+    <!--全屏按钮-->
+    <img src="img/fullscreen.png" id="fullScreenBtn" style="
+    top:24px;
+    left:1816px;
+    z-index:1001;
+    position:absolute;
+    width: 65px;" onclick="fullScreen()" />
+
+    <!--退出全屏按钮-->
+    <img src="img/fullscreen.png" id="exitFullScreenBtn" style="
+    top:24px;
+    left:1816px;
+    z-index:1000;
+    position:absolute;
+    width: 65px;" onclick="exitFullScreen()" />
+
+    <!--钟表-->
+    <div id="time" style="
+        top: 28px;
+        left: 100px;
+        z-index: 69;
+        position: absolute;
+        line-height: 38px;
+        font-size: 28px;
+        color: rgba(255,255,255,0.85);
+        letter-spacing: 0;
+    ">
+    </div>
+
+    <!--左上待办任务表格-->
+    <div style="width: 400px; top: 137px; left: 59px; z-index: 4; position: absolute;">
+
+        <table border="0" cellpadding="0" cellspacing="0" width="400px">
+            <thead style="padding: 5px;color: rgb(255, 255, 255);font-size: 16px;text-align: center;font-weight: normal;">
+                <tr>
+                    <td style="width:70px;padding: 5px;">任务</td>
+                    <td style="width: 110px; padding: 5px;">执行人</td>
+                    <td style="width: 120px; padding: 5px;">当前状态</td>
+                    <td style="width: 100px; padding: 5px;">所属公司</td>
+                </tr>
+            </thead>
+            <tbody id="tasktdody" style="text-align: center;color: rgba(255,255,255,0.80); font-size: 15px; font-weight: normal;">
+                <!--<tr>
+                    <td style="width:70px;padding: 7px 8px;">检修</td>
+                    <td style="width:110px;padding: 7px 8px;">李四</td>
+                    <td style="width:120px;padding: 7px 8px;">待处理</td>
+                    <td style="width:100px;padding: 7px 8px;">白水</td>
+                </tr>
+                <tr>
+                    <td style="width:70px;padding: 7px 8px;">检修</td>
+                    <td style="width:110px;padding: 7px 8px;">李四</td>
+                    <td style="width:120px;padding: 7px 8px;">待处理</td>
+                    <td style="width:100px;padding: 7px 8px;">白水</td>
+                </tr>
+                <tr>
+                    <td style="width:70px;padding: 7px 8px;">检修</td>
+                    <td style="width:110px;padding: 7px 8px;">李四</td>
+                    <td style="width:120px;padding: 7px 8px;">待处理</td>
+                    <td style="width:100px;padding: 7px 8px;">白水</td>
+                </tr>
+                <tr>
+                    <td style="width:70px;padding: 7px 8px;">检修</td>
+                    <td style="width:110px;padding: 7px 8px;">李四</td>
+                    <td style="width:120px;padding: 7px 8px;">待处理</td>
+                    <td style="width:100px;padding: 7px 8px;">白水</td>
+                </tr>
+                <tr>
+                    <td style="width:70px;padding: 7px 8px;">检修</td>
+                    <td style="width:110px;padding: 7px 8px;">李四</td>
+                    <td style="width:120px;padding: 7px 8px;">待处理</td>
+                    <td style="width:100px;padding: 7px 8px;">白水</td>
+                </tr>-->
+            </tbody>
+        </table>
+
+    </div>
+
+    <!--圆形表盘1-->
+    <div style="
+        background-image: url(img/8.gif);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 90px;
+        height: 90px;
+        top: 408px;
+        left: 56px;
+        z-index: 6;
+        position:absolute;">
+    </div>
+    <div id="divbaoxiu" style="
+        position: absolute;
+        top: 440px;
+        left: 88px;
+        z-index: 6;
+        font-size: 22px;
+        color: rgb(255, 255, 255);
+        font-weight: normal;">
+    </div>
+    <div style="
+        position: absolute;
+        top: 514px;
+        left: 64px;
+        z-index: 6;
+        font-size: 14px;
+        color: #ffffff;
+        font-weight: normal;">
+        未处理保修
+    </div>
+
+    <!--圆形表盘2-->
+    <div style="
+        background-image: url(img/7.gif);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 90px;
+        height: 90px;
+        top: 408px;
+        left: 167px;
+        z-index: 6;
+        position:absolute;">
+    </div>
+    <div id="divjinribaoxiu" style="
+        position: absolute;
+        top: 440px;
+        left: 199px;
+        z-index: 6;
+        font-size: 22px;
+        color: rgb(255, 255, 255);
+        font-weight: normal;">
+    </div>
+    <div style="
+        position: absolute;
+        top: 514px;
+        left: 185px;
+        z-index: 6;
+        font-size: 14px;
+        color: #ffffff;
+        font-weight: normal;">
+        今日报修
+    </div>
+
+    <!--圆形表盘3-->
+    <div style="
+        background-image: url(img/6.gif);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 90px;
+        height: 90px;
+        top: 408px;
+        left: 278px;
+        z-index: 6;
+        position: absolute;">
+    </div>
+    <div id="divguzhang" style="
+        position: absolute;
+        top: 440px;
+        left: 310px;
+        z-index: 6;
+        font-size: 22px;
+        color: rgb(255, 255, 255);
+        font-weight: normal;">
+    </div>
+    <div style="
+        position: absolute;
+        top: 514px;
+        left: 305px;
+        z-index: 6;
+        font-size: 14px;
+        color: #ffffff;
+        font-weight: normal;">
+        故障数
+    </div>
+
+    <!--圆形表盘4-->
+    <div style="
+        background-image: url(img/7.gif);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 90px;
+        height: 90px;
+        top: 408px;
+        left: 389px;
+        z-index: 6;
+        position: absolute;">
+    </div>
+    <div id="divwanchengrenwu" style="
+        position: absolute;
+        top: 440px;
+        left: 421px;
+        z-index: 6;
+        font-size: 22px;
+        color: rgb(255, 255, 255);
+        font-weight: normal;">
+    </div>
+    <div style="
+        position: absolute;
+        top: 514px;
+        left: 407px;
+        z-index: 6;
+        font-size: 14px;
+        color: #ffffff;
+        font-weight: normal;">
+        完成任务
+    </div>
+
+
+    <!--左边下雷达图-->
+    <div style=" width: 473px;
+        top: 565px;
+        left: 20px;
+        z-index: 16;
+        position: absolute;
+       ">
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div id="left1" style="width: 473px;height:220px; padding-top:20px; padding-left:10px;"></div>
+    </div>
+
+    <!--左边下柱状图-->
+    <div style="width: 469px;
+        top: 804px;
+        left: 41px;
+        z-index: 18;
+        position: absolute;">
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div id="left2" style="width: 469px;height:244px; padding-top:20px; padding-left:10px;"></div>
+    </div>
+
+
+    <!--中间下表格-->
+    <div style="width: 820px; top: 600px; left: 515px; z-index: 17; position: absolute; padding: 30px;">
+        <!-- <marquee id="affiche" align="left" behavior="scroll"
+             direction="up" hspace="0" vspace="0"
+             loop="-1" scrollamount="5" scrolldelay="0"
+             onMouseOut="this.start()" onMouseOver="this.stop()"> -->
+
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <thead style="color: rgb(255, 255, 255);font-size: 16px;text-align: center;font-weight: normal;">
+                <tr>
+                    <td style="padding: 8px 5px;width:10%">设备</td>
+                    <td style="padding: 8px 5px; width: 10%">编号</td>
+                    <td style="padding: 8px 5px; width: 14%">保修人</td>
+                    <td style="padding: 8px 5px; width: 18%">保修时间</td>
+                    <td style="padding: 8px 5px; width: 13%">故障等级</td>
+                    <td style="padding: 8px 5px; width: 13%">当前状态</td>
+                    <td style="padding: 8px 5px; width: 22%">持续时间（分钟）</td>
+                </tr>
+            </thead>
+            <tbody id="bugtbody" style="text-align: center;color: rgba(255,255,255,0.80); font-size: 15px; font-weight: normal; margin-top:5px;">
+                <!--<tr>
+                    <td style="padding: 7px 5px; width: 9%">压缩机</td>
+                    <td style="padding: 7px 5px; width: 9%">50022</td>
+                    <td style="padding: 7px 5px; width: 14%">张三</td>
+                    <td style="padding: 7px 5px; width: 18% ">2020-08-21 14:00</td>
+                    <td style="padding: 7px 5px; width: 14%">严重</td>
+                    <td style="padding: 7px 5px; width: 14%">待分配</td>
+                    <td style="padding: 7px 5px; width: 22%">30</td>
+                </tr>
+                <tr>
+                    <td style="padding: 7px 5px; width: 9%">压缩机</td>
+                    <td style="padding: 7px 5px; width: 9%">50022</td>
+                    <td style="padding: 7px 5px; width: 14%">张三</td>
+                    <td style="padding: 7px 5px; width: 18% ">2020-08-21 14:00</td>
+                    <td style="padding: 7px 5px; width: 14%">严重</td>
+                    <td style="padding: 7px 5px; width: 14%">待分配</td>
+                    <td style="padding: 7px 5px; width: 22%">30</td>
+                </tr>
+                <tr>
+                    <td style="padding: 7px 5px; width: 9%">压缩机</td>
+                    <td style="padding: 7px 5px; width: 9%">50022</td>
+                    <td style="padding: 7px 5px; width: 14%">张三</td>
+                    <td style="padding: 7px 5px; width: 18% ">2020-08-21 14:00</td>
+                    <td style="padding: 7px 5px; width: 14%">严重</td>
+                    <td style="padding: 7px 5px; width: 14%">待分配</td>
+                    <td style="padding: 7px 5px; width: 22%">30</td>
+                </tr>
+                <tr>
+                    <td style="padding: 7px 5px; width: 9%">压缩机</td>
+                    <td style="padding: 7px 5px; width: 9%">50022</td>
+                    <td style="padding: 7px 5px; width: 14%">张三</td>
+                    <td style="padding: 7px 5px; width: 18% ">2020-08-21 14:00</td>
+                    <td style="padding: 7px 5px; width: 14%">严重</td>
+                    <td style="padding: 7px 5px; width: 14%">待分配</td>
+                    <td style="padding: 7px 5px; width: 22%">30</td>
+                </tr>
+                <tr>
+                    <td style="padding: 7px 5px; width: 9%">压缩机</td>
+                    <td style="padding: 7px 5px; width: 9%">50022</td>
+                    <td style="padding: 7px 5px; width: 14%">张三</td>
+                    <td style="padding: 7px 5px; width: 18% ">2020-08-21 14:00</td>
+                    <td style="padding: 7px 5px; width: 14%">严重</td>
+                    <td style="padding: 7px 5px; width: 14%">待分配</td>
+                    <td style="padding: 7px 5px; width: 22%">30</td>
+                </tr>-->
+            </tbody>
+        </table>
+        <!-- </marquee> -->
+
+    </div>
+
+    <!--中间下仪表盘-->
+    <div style=" width: 864px;
+        top: 885px;
+        left: 529px;
+        z-index: 19;
+        position: absolute;">
+
+        <!-- 仪表盘总div-->
+        <div style="margin-left:-0px; position:absolute;">
+
+            <!--仪表盘1-->
+            <div style=" top: 0px; left: 0px; z-index: 35; position: absolute;">
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="left3" style="width: 160px; height: 200px; padding-left: 35px;"></div>
+            </div>
+
+            <!--仪表盘2-->
+            <div style=" top: 0px; left: 210px; z-index: 35; position: absolute;">
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="left4" style="width: 160px;height: 200px;padding-left: 35px;"></div>
+            </div>
+
+            <!--仪表盘3-->
+            <div style=" top: 0px; left: 420px; z-index: 35; position: absolute;">
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="left5" style="width: 160px;height: 200px;padding-left: 35px;"></div>
+            </div>
+
+            <!--仪表盘4-->
+            <div style=" top: 0px; left: 630px; z-index: 35; position: absolute;">
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="left6" style="width: 160px;height: 200px;padding-left: 35px;"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--右侧折线图表-->
+    <div style="width: 477px;
+        height: 565px;
+        top: 500px;
+        left: 1415px;
+        z-index: 20;
+        position: absolute;
+">
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div id="right1" style="width: 477px;height:200px;  padding-left:10px; margin-top:25px"></div>
+
+        <div id="right2" style="width: 477px;height:200px;  padding-left:10px; margin-top:-25px"></div>
+
+        <div id="right3" style="width: 477px;height:200px;  padding-left:10px; margin-top:-30px"></div>
+
+    </div>
+
+
+    <!--右侧上方：设备总台数-->
+    <div id="divdevicenum" style="
+        top: 155px;
+        left: 1444px;
+        z-index: 57;
+        position: absolute;
+        letter-spacing: 5px;
+        font-size: 40px;
+        color: #FFEB7B;
+        font-weight: bold;
+">  
+    </div>
+
+    <!--右侧上方文字：设备总价值-->
+    <div id="divdevicecost" style="
+        top: 240px;
+        left: 1444px;
+        z-index: 57;
+        position: absolute;
+        letter-spacing: 5px;
+        font-size: 40px;
+        color: #FFEB7B;
+        font-weight: bold;
+">
+    </div>
+
+    <!--右侧上方文字：今日新增设备-->
+    <div id="divdevicenumnow" style="
+        top: 381px;
+        left: 1646px;
+        z-index: 57;
+        position: absolute;
+        letter-spacing: 2px;
+        font-size: 20px;
+        color: #00FDFB;
+        font-weight: bold;
+">
+    </div>
+
+
+    <!--右侧上方文字：今日新增设备价值-->
+    <div id="divdevicecostnow" style="        top: 443px;
+        left: 1595px;
+        z-index: 57;
+        position: absolute;
+        letter-spacing: 2px;
+        font-size: 20px;
+        color: #00FDFB;
+        font-weight: bold;
+    ">
+    </div>
+
+    <!--右侧上方环形图表-->
+    <div style="        top: 143px;
+        left: 1720px;
+        z-index: 40;
+        position: absolute;
+        background-image: url(img/c1.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 130px;
+        height: 130px;
+">
+    </div>
+
+    <div style="top: 143px;left: 1720px; z-index: 40; position: absolute;">
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div id="pie1" style="width: 130px;height:130px; "></div>
+    </div>
+
+    <div style="        top: 345px;
+        left: 1720px;
+        z-index: 40;
+        position: absolute;
+        background-image: url(img/c2.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 130px;
+        height: 130px;
+">
+    </div>
+
+    <div style=" top: 345px; left: 1720px; z-index: 40; position: absolute; ">
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div id="pie2" style="width: 130px;height:130px;"></div>
+    </div>
+
+    <!--地图-->
+    <div style="width: 650px; top: 50px; left: 656px; z-index: 63;position:absolute;">
+        <div id="map" style="width: 650px;height:610px;"></div>
+    </div>
+
+</body>
+</html>

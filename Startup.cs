@@ -16,6 +16,10 @@ using Quartz;
 using RuiJinChengWebApi.Hubs;
 using Microsoft.Extensions.FileProviders;
 using RuiJinChengWebApi.Services;
+using log4net.Repository;
+using log4net;
+using log4net.Config;
+using System.IO;
 
 namespace RuiJinChengWebApi
 {
@@ -23,10 +27,13 @@ namespace RuiJinChengWebApi
     {
         // 跨域策略名称：可以任意取
         private readonly string OriginName = "cors";
+        public static ILoggerRepository repository { get; set; }
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            repository = LogManager.CreateRepository("rollingAppender");
+            XmlConfigurator.Configure(repository, new FileInfo(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log4net.config")));
         }
 
         public IConfiguration Configuration { get; }
@@ -89,7 +96,7 @@ namespace RuiJinChengWebApi
 
             // 注册ISchedulerFactory的实例
             services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
-            JobSchedulerWork.Work();
+            //JobSchedulerWork.Work();
         }
 
         public void Configure(IApplicationBuilder app)

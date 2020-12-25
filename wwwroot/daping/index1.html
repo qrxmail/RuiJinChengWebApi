@@ -1,0 +1,1287 @@
+﻿<!DOCTYPE html>
+<html style="overflow-x:inherit;overflow-y:auto;" id="html1">
+<head>
+    <meta charset="utf-8" />
+    <title>陕西城燃驾驶舱</title>
+    <script src="jquery.min.js"></script>
+    <script src="echarts.min.js"></script>
+    <script type="text/javascript">
+
+        // 浏览器的高度、宽度
+        var dh = 1080;
+        var dw = 1920;
+
+        // 页面初始化
+        $(function () {
+            dh = $(document).height();
+            dw = $(document).width();
+            SetBodyScale();
+
+            $("#fullScreenBtn").show();
+            $("#exitFullScreenBtn").hide();
+        });
+
+        // 窗体改变大小事件
+        $(window).resize(function () {
+            SetBodyScale();
+        });
+
+        // 设置body的缩放比例
+        function SetBodyScale() {
+
+            // 当前窗体的高度
+            var ww = $(window).width();
+
+            // 计算缩放比例
+            var r = ww / dw;
+            $("#body").css("transform", "scale(" + r + ")");
+        }
+
+        // 全屏
+        function fullScreen() {
+            var elem = document.documentElement;
+            if (elem.webkitRequestFullScreen) {
+                elem.webkitRequestFullScreen();
+            } else if (elem.mozRequestFullScreen) {
+                elem.mozRequestFullScreen();
+            } else if (elem.requestFullScreen) {
+                elem.requestFullscreen();
+            } else {
+                alert("浏览器不支持全屏API或已被禁用");
+                //notice.notice_show("浏览器不支持全屏API或已被禁用", null, null, null, true, true);
+            }
+            $("#fullScreenBtn").hide();
+            $("#exitFullScreenBtn").show();
+        }
+
+        // 退出全屏
+        function exitFullScreen() {
+            var elem = document;
+            if (elem.webkitCancelFullScreen) {
+                elem.webkitCancelFullScreen();
+            } else if (elem.mozCancelFullScreen) {
+                elem.mozCancelFullScreen();
+            } else if (elem.cancelFullScreen) {
+                elem.cancelFullScreen();
+            } else if (elem.exitFullscreen) {
+                elem.exitFullscreen();
+            } else {
+                alert("浏览器不支持全屏API或已被禁用");
+                //notice.notice_show("浏览器不支持全屏API或已被禁用", null, null, null, true, true);
+            }
+            $("#fullScreenBtn").show();
+            $("#exitFullScreenBtn").hide();
+        }
+
+    </script>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(1, 13, 34);
+            background-image: url('img/bg1.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+            transform: scale(1);
+            transform-origin: 0 0;
+            width: 1920px;
+            height: 1080px;
+            font-family: 'Microsoft YaHei';
+        }
+    </style>
+</head>
+<body id="body">
+    <!--全屏按钮-->
+    <div id="fullScreenBtn" style="
+        top: 37px;
+        left: 1810px;
+        z-index: 1000;
+        position: absolute;
+        line-height: 38px;">
+        <a style="  font-family: 微软雅黑;
+        font-size: 18px;
+        color: rgb(255, 255, 255);
+        font-weight: normal;
+        background: linear-gradient(0deg, rgba(0, 76, 139, 0.5), rgba(0, 79, 255, 0.5));
+        margin-right: 8px;
+        padding: 5px 10px;
+        letter-spacing:3px;
+        cursor:pointer;
+    " onclick="fullScreen()">全屏</a>
+    </div>
+
+    <!--退出全屏按钮-->
+    <div id="exitFullScreenBtn" style="
+        top: 37px;
+        left: 1770px;
+        z-index: 1000;
+        position: absolute;
+        line-height: 38px;">
+        <a style="  font-family: 微软雅黑;
+        font-size: 18px;
+        color: rgb(255, 255, 255);
+        font-weight: normal;
+        background: linear-gradient(0deg, rgba(0, 76, 139, 0.5), rgba(0, 79, 255, 0.5));
+        margin-right: 8px;
+        padding: 5px 10px;
+        letter-spacing:3px;
+        cursor:pointer;
+    " onclick="exitFullScreen()">退出全屏</a>
+    </div>
+
+
+    <!--文字-->
+    <div style="font-family: DIN;
+        font-size: 36px; color: rgb(255, 255, 255);
+        font-weight: normal;
+        letter-spacing: 0px;
+        width: 440px;
+        height: 88px;
+        top: 4px;
+        left: 740px;
+        z-index: 8;
+        position: absolute;
+        line-height: 88px;">
+        <a onclick="fullScreen()">陕西城市燃气设备管理平台</a>
+    </div>
+    <!--文字背景-->
+    <div style="background-image: url(img/1.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 990px;
+        height: 134px;
+        top: 2px;
+        left: 465px;
+        z-index: 34;
+        position: absolute;">
+    </div>
+    <!--钟表-->
+    <div style="
+        top: 37px;
+        left: 110px;
+        z-index: 69;
+        position: absolute;
+        line-height: 38px;">
+        <a style="  font-family: 微软雅黑;
+        font-size: 18px;
+        color: rgb(255, 255, 255);
+        font-weight: normal;
+        background: linear-gradient(0deg, rgba(0, 76, 139, 0.5), rgba(0, 79, 255, 0.5));
+        margin-right: 8px;
+        padding: 5px 10px;
+        letter-spacing:3px;
+    ">2020-08-20 16:16:15</a>
+    </div>
+
+    <!--左上图标1-->
+    <div style="width: 473px;
+        height: 250px;
+        top: 100px;
+        left: 38px;
+        z-index: 4;
+        position: absolute;
+        background-image: url(img/8.png);
+        background-repeat: no-repeat;
+        background-size: contain;">
+        <div style="padding:40px;">
+
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <thead style="padding: 5px;
+        background: linear-gradient(90deg, rgba(19, 35, 96, 0.57), rgba(0, 105, 255, 0.57));
+        font-family:'Microsoft YaHei';
+        color: rgb(255, 255, 255);
+        font-size: 14px;
+        text-align: center;
+        font-weight: normal;
+   ">
+                    <tr>
+                        <td style="width:25%;padding: 5px;">任务</td>
+                        <td style="width: 25%; padding: 5px;">执行人</td>
+                        <td style="width: 25%; padding: 5px;">当前状态</td>
+                        <td style="width: 25%; padding: 5px;">所属公司</td>
+                    </tr>
+                </thead>
+                <tbody style="text-align: center; color: rgb(0, 156, 240); font-size: 13px; font-weight: normal;">
+                    <tr>
+                        <td style="width:25%;padding: 8px;">检修</td>
+                        <td style="width:25%;padding: 8px;">李四</td>
+                        <td style="width:25%;padding: 8px;">待处理</td>
+                        <td style="width:25%;padding: 8px;">白水</td>
+                    </tr>
+                    <tr>
+                        <td style="width:25%;padding: 8px;">检修</td>
+                        <td style="width:25%;padding: 8px;">李四</td>
+                        <td style="width:25%;padding: 8px;">待处理</td>
+                        <td style="width:25%;padding: 8px;">白水</td>
+                    </tr>
+                    <tr>
+                        <td style="width:25%;padding: 8px;">检修</td>
+                        <td style="width:25%;padding: 8px;">李四</td>
+                        <td style="width:25%;padding: 8px;">待处理</td>
+                        <td style="width:25%;padding: 8px;">白水</td>
+                    </tr>
+                    <tr>
+                        <td style="width:25%;padding: 8px;">检修</td>
+                        <td style="width:25%;padding: 8px;">李四</td>
+                        <td style="width:25%;padding: 8px;">待处理</td>
+                        <td style="width:25%;padding: 8px;">白水</td>
+                    </tr>
+                    <tr>
+                        <td style="width:25%;padding: 5px;">检修</td>
+                        <td style="width:25%;padding: 5px;">李四</td>
+                        <td style="width:25%;padding: 5px;">待处理</td>
+                        <td style="width:25%;padding: 5px;">白水</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+    <!-- 左边分割线1-->
+    <div style="background-image: url(img/5.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 472px;
+        height: 12px;
+        top: 363px;
+        left: 38px;
+        z-index: 5;
+        position:absolute;">
+    </div>
+
+    <!--圆形表盘1-->
+    <div style="background-image: url(img/7.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 157px;
+        height: 108px;
+        top: 386px;
+        left: 29px;
+        z-index: 6;
+        position:absolute;">
+        <div style="position: absolute; top: 28px; left: 25px;">
+            <span style="font-family: DIN;
+        font-size: 22px;
+        color: rgb(255, 255, 255);
+        font-weight: normal;
+        display: block;
+        text-align: center;">92</span>
+            <span style="font-family: 微软雅黑;
+        font-size: 12px;
+        color: rgb(0, 255, 158);
+        font-weight: normal;
+        letter-spacing: 0px;
+        display: block;">未处理保修</span>
+        </div>
+    </div>
+
+    <!--圆形表盘2-->
+    <div style="background-image: url(img/7.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 157px;
+        height: 108px;
+        top: 386px;
+        left: 152px;
+        z-index: 6;
+        position:absolute;">
+        <div style="position: absolute; top: 28px; left: 30px;">
+            <span style="font-family: DIN;
+        font-size: 22px;
+        color: rgb(255, 255, 255);
+        font-weight: normal;
+        display: block;
+        text-align: center;">83</span>
+            <span style="font-family: 微软雅黑;
+        font-size: 12px;
+        color: rgb(0, 255, 158);
+        font-weight: normal;
+        letter-spacing: 0px;
+        display: block;">今日报修</span>
+        </div>
+    </div>
+
+    <!--圆形表盘3-->
+    <div style="background-image: url(img/6.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 157px;
+        height: 108px;
+        top: 386px;
+        left: 275px;
+        z-index: 6;
+        position:absolute;">
+        <div style="position: absolute; top: 28px; left: 35px;">
+            <span style="        font-family: DIN;
+        font-size: 22px;
+        color: rgb(255, 255, 255);
+        font-weight: normal;
+        display: block;
+        text-align: center;">56</span>
+            <span style="        font-family: 微软雅黑;
+        font-size: 12px;
+        color: rgb(252, 52, 143);
+        font-weight: normal;
+        letter-spacing: 0px;
+        display: block;">故障数</span>
+        </div>
+    </div>
+
+    <!--圆形表盘4-->
+    <div style="background-image: url(img/7.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 157px;
+        height: 108px;
+        top: 386px;
+        left: 398px;
+        z-index: 6;
+        position:absolute;">
+        <div style="position: absolute; top: 28px; left: 30px;">
+            <span style="font-family: DIN;
+        font-size: 22px;
+        color: rgb(255, 255, 255);
+        font-weight: normal;
+        display: block;
+        text-align: center;">72</span>
+            <span style="font-family: 微软雅黑;
+        font-size: 12px;
+        color: rgb(0, 255, 158);
+        font-weight: normal;
+        letter-spacing: 0px;
+        display: block;">完成任务</span>
+        </div>
+    </div>
+
+    <!-- 左边分割线2-->
+    <div style="background-image: url(img/5.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 472px;
+        height: 12px;
+        top: 510px;
+        left: 38px;
+        z-index: 5;
+        position:absolute;">
+    </div>
+
+    <!--左边下1-->
+    <div style=" width: 473px;
+        height: 245px;
+        top: 539px;
+        left: 39px;
+        z-index: 16;
+        position: absolute;
+        background-image: url(img/9.png);
+        background-repeat: no-repeat;
+        background-size: contain;">
+
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div id="left1" style="width: 473px;height:220px; padding-top:20px; padding-left:10px;"></div>
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('left1'));
+
+            // 指定图表的配置项和数据
+            option = {
+                //title: {
+                //    text: '基础雷达图'
+                //},
+                tooltip: {},
+                //legend: {
+                //    data: ['预算分配（Allocated Budget）', '实际开销（Actual Spending）']
+                //},
+                radar: {
+                    shape: 'circle',
+                    radius: ["0%", "65%"],
+                    name: {
+                        textStyle: {
+                            color: '#fff',
+                        }
+                    },
+                    splitArea: {
+                        show: false,
+                        //areaStyle: {
+                        //    color: ["#2a4a93"]  // 图表背景网格的颜色
+                        //}
+                    },
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            width: 1,
+                            color: '#009cf0' // 图表背景网格线的颜色
+                        }
+                    },
+                    indicator: [
+                        { name: '设备完好率', max: 100 },
+                        { name: '设备利用率', max: 100 },
+                        { name: '维护及时率', max: 100 },
+                        { name: '检修及时率', max: 100 },
+                        { name: '巡检及时率', max: 100 },
+                    ]
+                },
+                series: [{
+                    name: '预算 vs 开销（Budget vs spending）',
+                    type: 'radar',
+                    itemStyle: {
+                        normal: {
+                            color: "rgba(0, 105, 255, 0.57)", // 图表中各个图区域的边框线拐点颜色
+                            lineStyle: {
+                                color: "white" // 图表中各个图区域的边框线颜色
+                            },
+                            areaStyle: {
+                                type: 'default'
+                            }
+                        }
+                    },
+                    data: [
+                        {
+                            value: [100, 98, 88, 90, 50, 60],
+                            name: '百分比（%）'
+                        },
+                    ]
+                }]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        </script>
+    </div>
+
+    <!--左边下2-->
+    <div style="        width: 469px;
+        height: 244px;
+        top: 804px;
+        left: 41px;
+        z-index: 18;
+        position: absolute;
+        background-image: url(img/10.png);
+        background-repeat: no-repeat;
+        background-size: contain;">
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div id="left2" style="width: 469px;height:244px; padding-top:20px; padding-left:10px;"></div>
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('left2'));
+
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: '故障排名',
+                    textStyle: {
+                        fontSize: 16,
+                        color: "#fff",
+                        fontStyle: "normal",
+                        fontWeight: "normal",
+                        fontFamily: "Arial"
+                    },
+                },
+                tooltip: {},
+                //legend: {
+                //    data: ['销量']
+                //},
+                xAxis: {
+                    data: ["泄露", "缺油", "进水", "短路", "短路1", "短路2", "短路3", "短路4"],
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: "#fff"
+                        }
+                    },
+                },
+                yAxis: {
+                    splitLine: {
+                        show: false
+                    },
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: "#fff"
+                        }
+                    },
+                },
+                series: [
+                    {
+                        name: '数量',
+                        type: 'bar',
+                        barWidth: 10,
+                        itemStyle: {
+                            color: '#576bfc',
+                            barBorderRadius: [3, 3, 0, 0],
+                        },
+                        emphasis: {
+                            itemStyle: {
+                                color: '#83bff6',
+                            }
+                        },
+                        data: [120, 115, 100, 50, 80, 90, 20, 10]
+                    }
+                ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
+        </script>
+    </div>
+
+    <!--中间圆环-->
+    <div style="        width: 82px;
+        height: 122px;
+        top: 754px;
+        left: 483px;
+        z-index: 21;
+        position: absolute;
+        background-image: url(img/14.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+">
+    </div>
+
+    <!--圆环右上-->
+    <div style="        width: 869px;
+        height: 228px;
+        top: 560px;
+        left: 527px;
+        z-index: 17;
+        position: absolute;
+        background-image: url(img/11.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+">
+        <div style="padding:30px;">
+
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <thead style="padding: 5px;
+        background: linear-gradient(90deg, rgba(19, 35, 96, 0.57), rgba(0, 105, 255, 0.57));
+        font-family: 微软雅黑;
+        color: rgb(255, 255, 255);
+        font-size: 14px;
+        text-align: center;
+        font-weight: normal;
+   ">
+                    <tr>
+                        <td style="padding: 8px;width:12%">设备</td>
+                        <td style=" padding: 5px;width:12%">编号</td>
+                        <td style=" padding: 5px;width:14%">保修人</td>
+                        <td style=" padding: 5px;width:16%">保修时间</td>
+                        <td style=" padding: 5px;width:14%">故障等级</td>
+                        <td style=" padding: 5px;width:14%">当前状态</td>
+                        <td style=" padding: 5px;width:16%">持续时间（分钟）</td>
+                    </tr>
+                </thead>
+            </table>
+            <!-- <marquee id="affiche" align="left" behavior="scroll"
+                     direction="up" hspace="0" vspace="0"
+                     loop="-1" scrollamount="5" scrolldelay="0"
+                     onMouseOut="this.start()" onMouseOver="this.stop()"> -->
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tbody style="text-align: center; color: rgb(0, 156, 240); font-size: 13px; font-weight: normal;">
+                        <tr>
+                            <td style="padding: 8px;width:12%">压缩机</td>
+                            <td style="padding: 5px;width:12%">50022</td>
+                            <td style="padding: 5px;width:14%">张三</td>
+                            <td style="padding: 5px;width:16%">2020-08-21 14:00</td>
+                            <td style="padding: 5px;width:14%">严重</td>
+                            <td style="padding: 5px;width:14%">待分配</td>
+                            <td style="padding: 5px;width:16%">30</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;width:12%">压缩机</td>
+                            <td style="padding: 5px;width:12%">50022</td>
+                            <td style="padding: 5px;width:14%">张三</td>
+                            <td style="padding: 5px;width:16%">2020-08-21 14:00</td>
+                            <td style="padding: 5px;width:14%">严重</td>
+                            <td style="padding: 5px;width:14%">待分配</td>
+                            <td style="padding: 5px;width:16%">30</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;width:12%">压缩机</td>
+                            <td style="padding: 5px;width:12%">50022</td>
+                            <td style="padding: 5px;width:14%">张三</td>
+                            <td style="padding: 5px;width:16%">2020-08-21 14:00</td>
+                            <td style="padding: 5px;width:14%">严重</td>
+                            <td style="padding: 5px;width:14%">待分配</td>
+                            <td style="padding: 5px;width:16%">30</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;width:12%">压缩机</td>
+                            <td style="padding: 5px;width:12%">50022</td>
+                            <td style="padding: 5px;width:14%">张三</td>
+                            <td style="padding: 5px;width:16%">2020-08-21 14:00</td>
+                            <td style="padding: 5px;width:14%">严重</td>
+                            <td style="padding: 5px;width:14%">待分配</td>
+                            <td style="padding: 5px;width:16%">30</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px;width:12%">压缩机</td>
+                            <td style="padding: 5px;width:12%">50022</td>
+                            <td style="padding: 5px;width:14%">张三</td>
+                            <td style="padding: 5px;width:16%">2020-08-21 14:00</td>
+                            <td style="padding: 5px;width:14%">严重</td>
+                            <td style="padding: 5px;width:14%">待分配</td>
+                            <td style="padding: 5px;width:16%">30</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            <!-- </marquee> -->
+
+        </div>
+
+    </div>
+
+    <!--圆环右下-->
+    <div style="        width: 864px;
+        height: 244px;
+        top: 804px;
+        left: 529px;
+        z-index: 19;
+        position: absolute;
+        background-image: url(img/12.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+">
+        <!-- 仪表盘总div-->
+        <div style="margin-left:-0px; position:absolute;">
+            <!--仪表盘1-->
+            <div style=" top: 0px; left: 0px; z-index: 35; position: absolute;">
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="left3" style="        width: 210px;
+        height: 244px;
+        padding-left: 10px;
+"></div>
+
+                <!--仪表盘下方文字-->
+                <div style="        width: 103px;
+        height: 38px;
+        text-align: center;
+        color: #fff;
+        font-family: 微软雅黑;
+        width: 100%;
+        margin-top: -50px;
+">完好率</div>
+
+            </div>
+
+            <!--仪表盘2-->
+            <div style=" top: 0px; left: 210px; z-index: 35; position: absolute;">
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="left4" style="        width: 210px;
+        height: 244px;
+        padding-left: 10px;
+"></div>
+
+                <!--仪表盘下方文字-->
+                <div style="        width: 103px;
+        height: 38px;
+        text-align: center;
+        color: #fff;
+        font-family: 微软雅黑;
+        width: 100%;
+        margin-top: -50px;
+">泄漏率</div>
+
+            </div>
+
+            <!--仪表盘3-->
+            <div style=" top: 0px; left: 420px; z-index: 35; position: absolute;">
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="left5" style="        width: 210px;
+        height: 244px;
+        padding-left: 10px;
+"></div>
+
+                <!--仪表盘下方文字-->
+                <div style="        width: 103px;
+        height: 38px;
+        text-align: center;
+        color: #fff;
+        font-family: 微软雅黑;
+        width: 100%;
+        margin-top: -50px;
+">利用率</div>
+
+            </div>
+
+            <!--仪表盘4-->
+            <div style=" top: 0px; left: 630px; z-index: 35; position: absolute;">
+                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                <div id="left6" style="        width: 210px;
+        height: 244px;
+        padding-left: 10px;
+"></div>
+
+                <!--仪表盘下方文字-->
+                <div style="        width: 103px;
+        height: 38px;
+        text-align: center;
+        color: #fff;
+        font-family: 微软雅黑;
+        width: 100%;
+        margin-top: -50px;
+">故障率</div>
+
+            </div>
+        </div>
+
+        <!-- echarts脚本-->
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart1 = echarts.init(document.getElementById('left3'));
+            var myChart2 = echarts.init(document.getElementById('left4'));
+            var myChart3 = echarts.init(document.getElementById('left5'));
+            var myChart4 = echarts.init(document.getElementById('left6'));
+
+            // 指定图表的配置项和数据
+            option = {
+
+                tooltip: {
+                    formatter: '{a}: {c}%'
+                },
+                series: [
+                    {
+                        axisLine: {             // 仪表盘轴线(轮廓线)相关配置。
+                            show: true,             // 是否显示仪表盘轴线(轮廓线),默认 true。
+                            lineStyle: {            // 仪表盘轴线样式。
+                                color: [[0.2, '#83dd40'], [0.8, '#0062fb'], [1, '#d04e70']],  //仪表盘的轴线可以被分成不同颜色的多段。每段的  结束位置(范围是[0,1]) 和  颜色  可以通过一个数组来表示。默认取值：[[0.2, '#91c7ae'], [0.8, '#63869e'], [1, '#c23531']]
+                                opacity: 1,                 //图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                                width: 12,                  //轴线宽度,默认 30。
+                                //shadowBlur: 10,             //(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                                //shadowColor: "#fff",        //阴影颜色。支持的格式同color。
+                            }
+                        },
+                        splitLine: {            // 分隔线样式。
+                            show: true,             // 是否显示分隔线,默认 true。
+                            length: 12,             // 分隔线线长。支持相对半径的百分比,默认 30。
+                            lineStyle: {            // 分隔线样式。
+                                color: "#000",              //线的颜色,默认 #eee。
+                                opacity: 1,                 //图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                                width: 1,                   //线度,默认 2。
+                                type: "solid",              //线的类型,默认 solid。 此外还有 dashed,dotted
+                                //shadowBlur: 10,             //(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                                //shadowColor: "#fff",        //阴影颜色。支持的格式同color。
+                            }
+                        },
+
+                        axisTick: {             // 刻度(线)样式。
+                            show: true,             // 是否显示刻度(线),默认 true。
+                            splitNumber: 5,         // 分隔线之间分割的刻度数,默认 5。
+                            length: 5,              // 刻度线长。支持相对半径的百分比,默认 8。
+                            lineStyle: {            // 刻度线样式。
+                                color: "#000",              //线的颜色,默认 #eee。
+                                opacity: 1,                 //图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                                width: 1,                   //线度,默认 1。
+                                type: "solid",              //线的类型,默认 solid。 此外还有 dashed,dotted
+                                //shadowBlur: 10,             //(发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                                //shadowColor: "#fff",        //阴影颜色。支持的格式同color。
+                            },
+                        },
+
+                        axisLabel: {            // 刻度标签。
+                            show: true,             // 是否显示标签,默认 true。
+                            distance: 5,            // 标签与刻度线的距离,默认 5。
+                            color: "#fff",          // 文字的颜色,默认 #fff。
+                            fontSize: 12,           // 文字的字体大小,默认 5。
+                            formatter: "{value}",   // 刻度标签的内容格式器，支持字符串模板和回调函数两种形式。 示例:// 使用字符串模板，模板变量为刻度默认标签 {value},如:formatter: '{value} kg'; // 使用函数模板，函数参数分别为刻度数值,如formatter: function (value) {return value + 'km/h';}
+                        },
+
+                        pointer: {              // 仪表盘指针。
+                            show: true,             // 是否显示指针,默认 true。
+                            length: "70%",          // 指针长度，可以是绝对数值，也可以是相对于半径的百分比,默认 80%。
+                            width: 2,               // 指针宽度,默认 8。
+                        },
+
+                        itemStyle: {            // 仪表盘指针样式。
+                            color: "auto",          // 指针颜色，默认(auto)取数值所在的区间的颜色
+                            opacity: 1,             // 图形透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
+                            borderWidth: 0,         // 描边线宽,默认 0。为 0 时无描边。
+                            borderType: "solid",    // 柱条的描边类型，默认为实线，支持 'solid', 'dashed', 'dotted'。
+                            borderColor: "#000",    // 图形的描边颜色,默认 "#000"。支持的颜色格式同 color，不支持回调函数。
+                            //shadowBlur: 5,         // (发光效果)图形阴影的模糊大小。该属性配合 shadowColor,shadowOffsetX, shadowOffsetY 一起设置图形的阴影效果。
+                            //shadowColor: "#fff",    // 阴影颜色。支持的格式同color。
+                        },
+                        radius: "80%",
+                        name: '完好率',
+                        type: 'gauge',
+                        startAngle: 220,        // 仪表盘起始角度,默认 225。圆心 正右手侧为0度，正上方为90度，正左手侧为180度。
+                        endAngle: -40,          // 仪表盘结束角度,默认 -45
+                        detail: {
+                            show: true,             // 是否显示详情,默认 true。
+                            offsetCenter: [0, "50%"],// 相对于仪表盘中心的偏移位置，数组第一项是水平方向的偏移，第二项是垂直方向的偏移。可以是绝对的数值，也可以是相对于仪表盘半径的百分比。
+                            color: "auto",          // 文字的颜色,默认 auto。
+                            fontSize: 20,           // 文字的字体大小,默认 15。
+                            fontWeight: "bold",
+                            formatter: "{value}%",  // 格式化函数或者字符串
+                        },
+                        data: [{ value: 98 }]
+                    }
+                ]
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            option.series[0].data = [{ value: 98 }];
+            myChart1.setOption(option);
+            // 使用刚指定的配置项和数据显示图表。
+            option.series[0].data = [{ value: 12 }];
+            myChart2.setOption(option);
+            // 使用刚指定的配置项和数据显示图表。
+            option.series[0].data = [{ value: 90 }];
+            myChart3.setOption(option);
+            // 使用刚指定的配置项和数据显示图表。
+            option.series[0].data = [{ value: 10 }];
+            myChart4.setOption(option);
+        </script>
+
+    </div>
+
+    <!--右侧大框-->
+    <div style="width: 477px;
+        height: 565px;
+        top: 484px;
+        left: 1409px;
+        z-index: 20;
+        position: absolute;
+        background-image: url(img/13.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+">
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div id="right1" style="width: 477px;height:180px; padding-top:20px; padding-left:10px;"></div>
+
+        <div id="right2" style="width: 477px;height:180px;  padding-left:10px;"></div>
+
+        <div id="right3" style="width: 477px;height:180px;  padding-left:10px;"></div>
+
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart1 = echarts.init(document.getElementById('right1'));
+            var myChart2 = echarts.init(document.getElementById('right2'));
+            var myChart3 = echarts.init(document.getElementById('right3'));
+
+            // 指定图表的配置项和数据
+            option = {
+                title: {
+                    show: true,
+                    text: "故障数量",
+                    textStyle: {
+                        fontSize: 16,
+                        color: "#fff",
+                        fontStyle: "normal",
+                        fontWeight: "normal",
+                        fontFamily: "Arial"
+                    },
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    axisLabel: {
+                        textStyle: {
+                            color: '#fff',//坐标值得具体的颜色
+
+                        }
+                    },
+                    data: ['7/22', '7/23', '7/24', '7/25', '7/26', '7/27', '7/28', '7/29', '7/30', '8/1']
+                },
+                yAxis: {
+                    type: 'value',
+                    splitLine: { show: false },//去除网格线
+                    splitArea: { show: false },//保留网格区域
+                    axisLabel: {
+                        textStyle: {
+                            color: '#fff',//坐标值得具体的颜色
+
+                        }
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            type: 'solid',
+                            color: '#fff',
+                            width: '2'
+                        }
+                    },
+                },
+                series: [{
+                    data: [0, 2, 4, 6, 3, 6, 3, 5, 7, 8],
+                    type: 'line',
+                    areaStyle: {
+                        color: "rgba(0, 105, 255, 0.3)"
+                    },
+                    lineStyle: {
+                        color: "rgba(0, 105, 255, 1)"
+                    },
+                    itemStyle: {
+                        color: "rgba(255, 255, 255, 1)"
+                    }
+                }]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            option.title.text = "故障数量";
+            option.series[0].data = [0, 2, 4, 6, 3, 6, 3, 5, 7, 8];
+            myChart1.setOption(option);
+
+            option.title.text = "维保费用";
+            option.series[0].data = [0, 20, 14, 26, 31, 61, 31, 52, 71, 78];
+            myChart2.setOption(option);
+
+            option.title.text = "库存水平";
+            option.series[0].data = [10, 20, 51, 20, 72, 49, 10, 51, 72, 81];
+            myChart3.setOption(option);
+        </script>
+
+    </div>
+
+    <!--右侧中间分割-->
+    <div style="width: 472px;
+        height: 12px;
+        top: 455px;
+        left: 1410px;
+        z-index: 23;
+        position: absolute;
+        background-image: url(img/5.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+">
+
+    </div>
+
+    <!--右侧上方分割线-->
+    <div style="        width: 472px;
+        height: 12px;
+        top: 100px;
+        left: 1409px;
+        z-index: 22;
+        position: absolute;
+        background-image: url(img/5.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+">
+    </div>
+
+    <!--右侧上方文字-->
+    <div style="
+        top: 120px;
+        left: 1416px;
+        z-index: 40;
+        position: absolute;
+">
+        <a style="font-family: 微软雅黑;
+        font-size: 18px;
+        color: rgb(0, 156, 240);
+        letter-spacing: 0px;
+        font-weight:normal;">设备总数（台）</a>
+    </div>
+
+    <div style="
+        top: 155px;
+        left: 1416px;
+        z-index: 57;
+        position: absolute;
+        letter-spacing:5px;
+">
+        <a style="  font-family: 微软雅黑;
+        font-size: 30px;
+        color: rgb(255, 255, 255);
+        font-weight: normal;
+        background: linear-gradient(0deg, rgba(0, 76, 139, 0.5), rgba(0, 79, 255, 0.5));
+        margin-right: 8px;
+        padding: 1px 10px;
+    ">312,35</a>
+    </div>
+
+    <!--右侧上方文字-->
+    <div style="
+        top: 205px;
+        left: 1416px;
+        z-index: 40;
+        position: absolute;
+">
+        <a style="font-family: 微软雅黑;
+        font-size: 18px;
+        color: rgb(0, 156, 240);
+        letter-spacing: 0px;
+        font-weight:normal;">设备总价值（万元）</a>
+    </div>
+
+    <div style="
+        top: 245px;
+        left: 1416px;
+        z-index: 57;
+        position: absolute;
+        letter-spacing:5px;
+">
+        <a style="  font-family: 微软雅黑;
+        font-size: 30px;
+        color: rgb(255, 255, 255);
+        font-weight: normal;
+        background: linear-gradient(0deg, rgba(0, 76, 139, 0.5), rgba(0, 79, 255, 0.5));
+        margin-right: 8px;
+        padding: 1px 10px;
+    ">888,920</a>
+    </div>
+
+
+    <!--右侧上方文字-->
+    <div style="
+        top: 320px;
+        left: 1516px;
+        z-index: 40;
+        position: absolute;
+">
+        <a style="        font-family: 微软雅黑;
+        font-size: 16px;
+        color: rgb(255, 255, 255);
+        letter-spacing: 0px;
+        font-weight: normal;">今年新增</a>
+    </div>
+
+    <!--右侧上方文字-->
+    <div style="
+        top: 360px;
+        left: 1416px;
+        z-index: 40;
+        position: absolute;
+">
+        <a style="        font-family: 微软雅黑;
+        font-size: 15px;
+        color: rgb(255, 255, 255);
+        letter-spacing: 0px;
+        font-weight: normal;">设备总数（台）</a>
+    </div>
+
+    <div style="
+        top: 360px;
+        left: 1576px;
+        z-index: 57;
+        position: absolute;
+        letter-spacing:5px;
+">
+        <a style="  font-family: 微软雅黑;
+        font-size: 14px;
+        color: rgb(255, 255, 255);
+        font-weight: normal;
+        background: linear-gradient(0deg, rgba(0, 76, 139, 0.5), rgba(0, 79, 255, 0.5));
+        margin-right: 8px;
+        padding: 1px 10px;
+    ">232</a>
+    </div>
+
+
+    <!--右侧上方文字-->
+    <div style="
+        top: 410px;
+        left: 1416px;
+        z-index: 40;
+        position: absolute;
+">
+        <a style="        font-family: 微软雅黑;
+        font-size: 15px;
+        color: rgb(255, 255, 255);
+        letter-spacing: 0px;
+        font-weight: normal;">设备总价值（万元）</a>
+    </div>
+
+    <div style="
+        top: 410px;
+        left: 1576px;
+        z-index: 57;
+        position: absolute;
+        letter-spacing: 5px;
+">
+        <a style="  font-family: 微软雅黑;
+        font-size: 14px;
+        color: rgb(255, 255, 255);
+        font-weight: normal;
+        background: linear-gradient(0deg, rgba(0, 76, 139, 0.5), rgba(0, 79, 255, 0.5));
+        margin-right: 8px;
+        padding: 1px 10px;
+    ">456.888</a>
+    </div>
+
+    <!--右侧上方环形图表-->
+    <div style=" top: 100px; left: 1700px; z-index: 40; position: absolute; ">
+
+        <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+        <div id="pie1" style="width: 180px;height:180px; "></div>
+        <div id="pie2" style="width: 180px;height:180px; "></div>
+
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var myChart1 = echarts.init(document.getElementById('pie1'));
+            var myChart2 = echarts.init(document.getElementById('pie2'));
+
+            // 指定图表的配置项和数据
+            option = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b}: {c} ({d}%)'
+                },
+                //legend: {
+                //    orient: 'vertical',
+                //    left: 10,
+                //    data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+                //},
+                graphic: [{ //环形图中间添加文字
+                    type: 'text', //通过不同top值可以设置上下显示
+                    left: 'center',
+                    top: '45%',
+                    style: {
+                        text: '45.23',
+                        textAlign: 'center',
+                        fill: 'white', //文字的颜色
+                        width: 30,
+                        height: 30,
+                        fontSize: 20,
+                        fontFamily: "Microsoft YaHei"
+                    }
+                }],
+                series: [
+                    {
+                        name: '数量占比',
+                        type: 'pie',
+                        radius: ['50%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            //label: {
+                            //    show: true,
+                            //    fontSize: '30',
+                            //    fontWeight: 'bold'
+                            //}
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        data: [
+                            {
+                                value: 31235,
+                                name: '原数量',
+                                itemStyle: {
+                                    color: "#1ccad5",
+                                    label: {
+                                        show: true,
+                                        position: 'inside'
+                                    },
+                                }
+                            },
+                            {
+                                value: 232,
+                                name: '新增数量',
+                                itemStyle: {
+                                    color: "#172e74",
+                                    label: {
+                                        show: true,
+                                        position: 'inside'
+                                    },
+                                }
+                            },
+                        ]
+                    }
+                ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            option.graphic[0].style.text = "45.24";
+            option.series[0].name = "数量占比";
+            option.series[0].data = [
+                {
+                    value: 100,
+                    name: '原数量',
+                    itemStyle: {
+                        color: "#1ccad5",
+                    }
+                },
+                {
+                    value: 60,
+                    name: '新增数量',
+                    itemStyle: {
+                        color: "#172e74",
+                    }
+                },
+            ];
+            myChart1.setOption(option);
+
+            option.graphic[0].style.text = "64.29";
+            option.series[0].name = "价值占比";
+            option.series[0].data = [
+                {
+                    value: 100,
+                    name: '原有价值',
+                    itemStyle: {
+                        color: "#1ccad5",
+                    }
+                },
+                {
+                    value: 30,
+                    name: '新增价值',
+                    itemStyle: {
+                        color: "#172e74",
+                    }
+                },
+            ];
+            myChart2.setOption(option);
+        </script>
+    </div>
+
+    <!--地图-->
+    <div style="width: 624px; height: 489px; top: 50px; left: 656px; z-index: 63;position:absolute;">
+        <div id="map" style="width: 624px;height:550px;"></div>
+        <script src="shanxi.js"></script>
+        <script type="text/javascript">
+            // 基于准备好的dom，初始化echarts实例
+            var chart = echarts.init(document.getElementById('map'));
+            chart.setOption({
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}<br/>{c} 台'
+                },
+                series: [{
+                    type: 'map',
+                    map: '陕西',
+                    showLegendSymbol: false,    //去除地图指示点
+                    roam: false,  // 是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移，可以设置成 'scale' 或者 'move'。设置成 true 为都开启
+                    label: {
+                        normal: {
+                            show: true,         //显示省份标签
+                            textStyle: {        //省份字体设置
+                                fontSize: 12,
+                                color: '#fff',
+                            }
+                        },
+                        emphasis: {             //鼠标悬浮效果
+                            show: true
+                        }
+                    },
+
+                    itemStyle: {
+                        normal: {
+                            borderWidth: 0.5,//区域边框宽度
+                            borderColor: '#ffffff',//区域边框颜色
+                            areaColor: "#076ad8", // 区域颜色
+                        },
+                        emphasis: {
+                            show: true,
+                        }
+                    },
+                    data: [
+                        { name: '榆林市', value: 200 },
+                        { name: '延安市', value: 300 },
+                        { name: '渭南市', value: 300 },
+                        { name: '西安市', value: 300 },
+                        { name: '安康市', value: 300 },
+                        { name: '宝鸡市', value: 300 },
+                        { name: '汉中市', value: 300 },
+                        { name: '咸阳市', value: 300 },
+                        { name: '商洛市', value: 300 },
+                        { name: '铜川市', value: 300 },
+                    ],
+                }]
+            });
+        </script>
+    </div>
+</body>
+</html>

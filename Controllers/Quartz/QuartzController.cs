@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using log4net;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Quartz;
 using RuiJinChengWebApi.Hubs;
@@ -11,6 +12,8 @@ namespace RuiJinChengWebApi.Controllers.Quartz
     [ApiController]
     public class QuartzController : ControllerBase
     {
+        private ILog log = LogManager.GetLogger(Startup.repository.Name, typeof(QuartzController));
+
         private readonly ISchedulerFactory _schedulerFactory;
         private IScheduler _scheduler;
         private readonly IHubContext<ChatHub> _hub;
@@ -22,20 +25,21 @@ namespace RuiJinChengWebApi.Controllers.Quartz
         }
 
         [HttpGet]
-        [Route("QuartzTest")]
-        public void QuartzTest(int type)
+        [Route("QuartzTask")]
+        public void QuartzTask(int type)
         {
-            JobKey jobKey = new JobKey("demo", "group1");
+            JobKey jobKey = new JobKey("workTicket", "work");
             switch (type)
             {
                 //添加任务
                 case 1:
                     var trigger = TriggerBuilder.Create()
-                            .WithDescription("触发器描述")
-                            .WithIdentity("test")
+                            .WithDescription("workTicket")
+                            .WithIdentity("admin")
                             //.WithSchedule(CronScheduleBuilder.CronSchedule("0 0/30 * * * ? *").WithMisfireHandlingInstructionDoNothing())
-                            .WithSimpleSchedule(x => x.WithIntervalInSeconds(1).RepeatForever().WithMisfireHandlingInstructionIgnoreMisfires())
+                            .WithSimpleSchedule(x => x.WithIntervalInSeconds(5).RepeatForever().WithMisfireHandlingInstructionIgnoreMisfires())
                             .Build();
+                    Jobs._hub = _hub;
                     _ = QuartzUtil.Add(typeof(Jobs), jobKey, trigger);
                     break;
                 //暂停任务
@@ -45,6 +49,10 @@ namespace RuiJinChengWebApi.Controllers.Quartz
                 //恢复任务
                 case 3:
                     _ = QuartzUtil.Resume(jobKey);
+                    break;
+                //删除任务
+                case 4:
+                    _ = QuartzUtil.Delete(jobKey);
                     break;
             }
         }
@@ -57,6 +65,8 @@ namespace RuiJinChengWebApi.Controllers.Quartz
         [HttpGet]
         public async Task TaskTest()
         {
+            log.Info("定时任务测试开始");
+
             //通过工场类获得调度器
             _scheduler = await _schedulerFactory.GetScheduler();
             //开启调度器
@@ -74,6 +84,8 @@ namespace RuiJinChengWebApi.Controllers.Quartz
                             .Build();
             //将触发器和作业任务绑定到调度器中
             await _scheduler.ScheduleJob(jobDetail, trigger);
+
+            log.Info("定时任务测试结束");
         }
     }
 

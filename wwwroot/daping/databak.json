@@ -1,0 +1,202 @@
+{
+  "taskData": [
+    {
+      "name": "检修",
+      "user": "李四",
+      "branch": "白水分公司",
+      "state": "待处理"
+    },
+    {
+      "name": "检修",
+      "user": "李四",
+      "branch": "白水分公司",
+      "state": "待处理"
+    },
+    {
+      "name": "检修",
+      "user": "李四",
+      "branch": "白水分公司",
+      "state": "待处理"
+    },
+    {
+      "name": "检修",
+      "user": "李四",
+      "branch": "白水分公司",
+      "state": "待处理"
+    },
+    {
+      "name": "检修",
+      "user": "李四",
+      "branch": "白水分公司",
+      "state": "待处理"
+    }
+  ],
+
+  "operData": {
+    "baoxiu": 92,
+    "jinribaoxiu": 83,
+    "guzhang": 56,
+    "wanchengrenwu": 72
+  },
+
+  "leidaData": [ 100, 98, 88, 90, 50, 60 ],
+
+  "chartZhuZhuangData": {
+    "xAxisData": [ "泄露", "缺油", "进水", "短路", "短路1", "短路2", "短路3", "短路4" ],
+    "seriesData": [ 120, 115, 100, 50, 80, 90, 20, 10 ]
+  },
+
+  "chartYiBiaoData": {
+    "y1": {
+      "name": "完好率",
+      "data": [ { "value": 98 } ]
+    },
+    "y2": {
+      "name": "泄露率",
+      "data": [ { "value": 12 } ]
+    },
+    "y3": {
+      "name": "利用率",
+      "data": [ { "value": 90 } ]
+    },
+    "y4": {
+      "name": "故障率",
+      "data": [ { "value": 10 } ]
+    }
+  },
+  "bugData": [
+    {
+      "deviceName": "压缩机",
+      "no": "50022",
+      "user": "张三",
+      "time": "2020-08-21 14:00",
+      "level": "严重",
+      "state": "待分配",
+      "timelen": "30"
+    },
+    {
+      "deviceName": "压缩机",
+      "no": "50022",
+      "user": "张三",
+      "time": "2020-08-21 14:00",
+      "level": "严重",
+      "state": "待分配",
+      "timelen": "30"
+    },
+    {
+      "deviceName": "压缩机",
+      "no": "50022",
+      "user": "张三",
+      "time": "2020-08-21 14:00",
+      "level": "严重",
+      "state": "待分配",
+      "timelen": "30"
+    },
+    {
+      "deviceName": "压缩机",
+      "no": "50022",
+      "user": "张三",
+      "time": "2020-08-21 14:00",
+      "level": "严重",
+      "state": "待分配",
+      "timelen": "30"
+    },
+    {
+      "deviceName": "压缩机",
+      "no": "50022",
+      "user": "张三",
+      "time": "2020-08-21 14:00",
+      "level": "严重",
+      "state": "待分配",
+      "timelen": "30"
+    }
+  ],
+  "chartZheXianData": {
+    "xAxisData": [ "7/22", "7/23", "7/24", "7/25", "7/26", "7/27", "7/28", "7/29", "7/30", "8/1" ],
+    "seriesData1": [ 0, 2, 4, 6, 3, 6, 3, 5, 7, 8 ],
+    "seriesData2": [ 0, 20, 14, 26, 31, 61, 31, 52, 71, 78 ],
+    "seriesData3": [ 10, 20, 51, 20, 72, 49, 10, 51, 72, 81 ]
+  },
+  "statDataDevice": {
+    "devicenum": "312,35",
+    "devicecost": "888,920",
+    "devicenumnow": "232",
+    "devicecostnow": "456.888"
+  },
+  "chartHuanXingData": {
+    "seriesData1": [
+      {
+        "value": 100,
+        "name": "原数量",
+        "itemStyle": {
+          "color": "#1DD6E5"
+        }
+      },
+      {
+        "value": 60,
+        "name": "新增数量",
+        "itemStyle": {
+          "color": "#0194FF"
+        }
+      }
+    ],
+    "seriesData2": [
+      {
+        "value": 100,
+        "name": "原有价值",
+        "itemStyle": {
+          "color": "#FCB760"
+        }
+      },
+      {
+        "value": 30,
+        "name": "新增价值",
+        "itemStyle": {
+          "color": "#F94303"
+        }
+      }
+    ]
+  },
+  "chartDiTuData": [
+    {
+      "name": "榆林市",
+      "value": 200
+    },
+    {
+      "name": "延安市",
+      "value": 300
+    },
+    {
+      "name": "渭南市",
+      "value": 300
+    },
+    {
+      "name": "西安市",
+      "value": 300
+    },
+    {
+      "name": "安康市",
+      "value": 300
+    },
+    {
+      "name": "宝鸡市",
+      "value": 300
+    },
+    {
+      "name": "汉中市",
+      "value": 300
+    },
+    {
+      "name": "咸阳市",
+      "value": 300
+    },
+    {
+      "name": "商洛市",
+      "value": 300
+    },
+    {
+      "name": "铜川市",
+      "value": 300
+    }
+  ]
+}
